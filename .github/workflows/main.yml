@@ -1,5 +1,5 @@
 name: Deploy to ECR
-# updated ECR Repo assignment1-CLO835
+# updated ECR Repo assignment2-CLO835
 on: 
   push:
     branches: [ development ]
@@ -31,8 +31,8 @@ jobs:
     - name: Build, test, tag, and push image to Amazon ECR
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-        MYSQL_ECR_REPOSITORY: assignment1-ecr-mysql
-        APP_ECR_REPOSITORY: assignment1-ecr-app
+        MYSQL_ECR_REPOSITORY: assignment2-ecr-mysql
+        APP_ECR_REPOSITORY: assignment2-ecr-app
         MYSQL_IMAGE_TAG: v0.1
         APP_IMAGE_TAG: v0.1
       run: |
