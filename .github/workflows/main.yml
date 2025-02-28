@@ -1,5 +1,5 @@
 name: Deploy to ECR
-# ECR Repo assignment2-CLO835
+# Update ECR Repo assignment2-CLO835
 on: 
   push:
     branches: [ development ]
