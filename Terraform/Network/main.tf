@@ -14,7 +14,7 @@ data "aws_availability_zones" "available" {
 }
 
 
-resource "aws_subnet" "public_subnet_assignment1" {
+resource "aws_subnet" "public_subnet_assignment2" {
    vpc_id            = aws_default_vpc.default_vpc.id
   cidr_block        = var.cidr_block
   availability_zone = data.aws_availability_zones.available.names[0]

@@ -17,7 +17,7 @@ data "aws_ami" "latest_amazon_linux" {
 data "terraform_remote_state" "public_subnet" { 
   backend = "s3"
   config = {
-    bucket = "assignment1-rgaraween"               
+    bucket = "assignment2-rgaraween"               
     key    = "dev/networking/terraform.tfstate" 
     region = "us-east-1"                          
   }
@@ -32,7 +32,7 @@ data "aws_availability_zones" "available" {
 resource "aws_instance" "my_amazon" {
   ami                         = data.aws_ami.latest_amazon_linux.id
   instance_type               = var.instance_type
-  key_name                    = aws_key_pair.assignment1.key_name
+  key_name                    = aws_key_pair.assignment2.key_name
   subnet_id                   = data.terraform_remote_state.public_subnet.outputs.subnet_id
   vpc_security_group_ids     = [aws_security_group.web_sg.id]
   associate_public_ip_address = true
@@ -47,22 +47,22 @@ resource "aws_instance" "my_amazon" {
 
 resource "aws_volume_attachment" "ebs_att" {
   device_name = "/dev/sdh"
-  volume_id   = aws_ebs_volume.assignment1.id
+  volume_id   = aws_ebs_volume.assignment2.id
   instance_id = aws_instance.my_amazon.id
 }
 
 
 
 
-resource "aws_key_pair" "assignment1" {
-  key_name   = "assignment1"
+resource "aws_key_pair" "assignment2" {
+  key_name   = "assignment2"
   public_key = file("${var.prefix}.pub")
 }
 
 
 
 
-resource "aws_ebs_volume" "assignment1" {
+resource "aws_ebs_volume" "assignment2" {
   availability_zone = data.aws_availability_zones.available.names[0]
   size              = 40
 
@@ -74,7 +74,7 @@ resource "aws_ebs_volume" "assignment1" {
 }
 
 resource "aws_ecr_repository" "mysql_ecr_repo" {
-  name                 = "assignment1-ecr-mysql"
+  name                 = "assignment2-ecr-mysql"
   image_tag_mutability = "MUTABLE"  
   image_scanning_configuration {
     scan_on_push = true
@@ -82,7 +82,7 @@ resource "aws_ecr_repository" "mysql_ecr_repo" {
 }
 
 resource "aws_ecr_repository" "app_ecr_repo" {
-  name                 = "assignment1-ecr-app"
+  name                 = "assignment2-ecr-app"
   image_tag_mutability = "MUTABLE"  
   image_scanning_configuration {
     scan_on_push = true
