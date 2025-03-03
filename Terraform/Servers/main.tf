@@ -96,15 +96,6 @@ resource "aws_security_group" "web_sg" {
   vpc_id      = data.terraform_remote_state.public_subnet.outputs.vpc_id
 
   ingress {
-    description      = "HTTP from everywhere"
-    from_port        = 80
-    to_port          = 80
-    protocol         = "tcp"
-    cidr_blocks      = ["0.0.0.0/0"]
-    ipv6_cidr_blocks = ["::/0"]
-  }
-
-  ingress {
     description      = "SSH from everywhere"
     from_port        = 22
     to_port          = 22
@@ -115,31 +106,13 @@ resource "aws_security_group" "web_sg" {
   
   ingress {
     description      = "8081 from everywhere"
-    from_port        = 8081
-    to_port          = 8081
+    from_port        = 30000
+    to_port          = 30000
     protocol         = "tcp"
     cidr_blocks      = ["0.0.0.0/0"]
     ipv6_cidr_blocks = ["::/0"]
   }
   
-  ingress {
-    description      = "8082 from everywhere"
-    from_port        = 8082
-    to_port          = 8082
-    protocol         = "tcp"
-    cidr_blocks      = ["0.0.0.0/0"]
-    ipv6_cidr_blocks = ["::/0"]
-  }
-  
-  ingress {
-    description      = "8083 from everywhere"
-    from_port        = 8083
-    to_port          = 8083
-    protocol         = "tcp"
-    cidr_blocks      = ["0.0.0.0/0"]
-    ipv6_cidr_blocks = ["::/0"]
-  }
-
   egress {
     from_port        = 0
     to_port          = 0

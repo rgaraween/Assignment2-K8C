@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mysql-pod
+  namespace: assignment2
+  labels:
+    app: mysql
+spec:
+  containers:
+    - name: mysql
+      image: 860572194478.dkr.ecr.us-east-1.amazonaws.com/assignment2-ecr-mysql:v0.1
+      ports:
+        - containerPort: 3306     # MySQL listens on port 3306
+      env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: "pw"
+  imagePullSecrets:
+    - name: regcred
+      
